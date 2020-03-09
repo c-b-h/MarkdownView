@@ -28,8 +28,8 @@ class MarkdownMaterialTextView @JvmOverloads constructor(
         a.recycle()
     }
 
-    fun setMarkdown(markdown: String) {
-        markwonHelper.markwon.setMarkdown(this, markdown)
+    fun setMarkdown(markdown: String?) {
+        markwonHelper.markwon.setMarkdown(this, markdown ?: "")
     }
 
     fun getMarkdown(): CharSequence {
