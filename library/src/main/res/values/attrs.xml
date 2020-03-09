@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="markdownStyles" format="reference" />
+
+    <declare-styleable name="MarkdownView">
+        <attr name="markdown" format="string|reference" />
+
+        <attr name="mdH1Style" format="reference" />
+        <attr name="mdH2Style" format="reference" />
+        <attr name="mdH3Style" format="reference" />
+        <attr name="mdH4Style" format="reference" />
+        <attr name="mdH5Style" format="reference" />
+        <attr name="mdH6Style" format="reference" />
+
+        <attr name="mdEmphasisStyle" format="reference" />
+        <attr name="mdStrongEmphasisStyle" format="reference" />
+        <attr name="mdBlockQuoteStyle" format="reference" />
+        <attr name="mdCodeStyle" format="reference" />
+        <attr name="mdFencedCodeBlockStyle" format="reference" />
+        <attr name="mdIndentedCodeBlockStyle" format="reference" />
+        <attr name="mdOrderedListItemStyle" format="reference" />
+        <attr name="mdUnorderedListItemStyle" format="reference" />
+<!--        <attr name="mdTaskListItemStyle" format="reference" />-->
+<!--        <attr name="mdTableRowStyle" format="reference" />-->
+        <attr name="mdParagraphStyle" format="reference" />
+        <attr name="mdLinkStyle" format="reference" />
+    </declare-styleable>
+</resources>
