@@ -2,12 +2,10 @@ package se.ingenuity.markdownview
 
 import android.content.Context
 import android.util.AttributeSet
-import io.noties.markwon.AbstractMarkwonPlugin
-import io.noties.markwon.Markwon
-import io.noties.markwon.MarkwonPlugin
-import io.noties.markwon.MarkwonSpansFactory
+import io.noties.markwon.*
 import io.noties.markwon.core.CoreProps
 import org.commonmark.node.*
+
 
 internal class MarkwonHelper(
     private val context: Context,
@@ -19,6 +17,12 @@ internal class MarkwonHelper(
         private val resolvedStyles =
             StyleResolver.resolveStyles(context, attrs, defStyleAttr, defStyleRes)
         private val spanFactory = SpanFactory(context)
+
+        override fun configureVisitor(builder: MarkwonVisitor.Builder) {
+            builder.on(
+                SoftLineBreak::class.java
+            ) { visitor, _ -> visitor.forceNewLine() }
+        }
 
         override fun configureSpansFactory(builder: MarkwonSpansFactory.Builder) {
             builder.maybeSetHeadingFactory()
