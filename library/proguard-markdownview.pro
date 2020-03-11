@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# *MarkdownView resolves MarkwonBuilderFactory with reflection.
+-keep public class * extends se.ingenuity.markdownview.util.MarkwonBuilderFactory {
+    public <init>();
+    public io.noties.markwon.Markwon.Builder createBuilder(android.content.Context, android.util.AttributeSet, int, int);
+}
