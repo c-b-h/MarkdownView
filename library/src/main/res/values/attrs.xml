@@ -10,15 +10,35 @@
         <attr name="markwonFactoryBuilder" />
 
         <attr name="mdListItemColor" format="reference|color" />
-
         <attr name="mdCodeBlockBackgroundColor" format="reference|color" />
+        <attr name="mdCodeBlockTextColor" format="reference|color" />
+        <attr name="mdCodeBlockMargin" format="reference|dimension" />
+        <attr name="mdThematicBreakColor" format="reference|color" />
+        <attr name="mdThematicBreakHeight" format="reference|dimension" />
 
+        <attr name="mdH1PreStyle" format="reference" />
         <attr name="mdH1Style" format="reference" />
+        <attr name="mdH1PostStyle" format="reference" />
+
+        <attr name="mdH2PreStyle" format="reference" />
         <attr name="mdH2Style" format="reference" />
+        <attr name="mdH2PostStyle" format="reference" />
+
+        <attr name="mdH3PreStyle" format="reference" />
         <attr name="mdH3Style" format="reference" />
+        <attr name="mdH3PostStyle" format="reference" />
+
+        <attr name="mdH4PreStyle" format="reference" />
         <attr name="mdH4Style" format="reference" />
+        <attr name="mdH4PostStyle" format="reference" />
+
+        <attr name="mdH5PreStyle" format="reference" />
         <attr name="mdH5Style" format="reference" />
+        <attr name="mdH5PostStyle" format="reference" />
+
+        <attr name="mdH6PreStyle" format="reference" />
         <attr name="mdH6Style" format="reference" />
+        <attr name="mdH6PostStyle" format="reference" />
 
         <attr name="mdEmphasisStyle" format="reference" />
         <attr name="mdStrongEmphasisStyle" format="reference" />
@@ -27,12 +47,18 @@
         <attr name="mdFencedCodeBlockStyle" format="reference" />
         <attr name="mdIndentedCodeBlockStyle" format="reference" />
         <attr name="mdOrderedListItemStyle" format="reference" />
+
+        <attr name="mdUnorderedListItemPreStyle" format="reference" />
         <attr name="mdUnorderedListItemStyle" format="reference" />
+        <attr name="mdUnorderedListItemPostStyle" format="reference" />
+
         <!--        <attr name="mdTaskListItemStyle" format="reference" />-->
         <!--        <attr name="mdTableRowStyle" format="reference" />-->
-        <attr name="mdParagraphStyle" format="reference" />
-        <attr name="mdLinkStyle" format="reference" />
 
-        <attr name="mdUnorderedListItemPostStyle" format="reference" />
+        <attr name="mdParagraphPreStyle" format="reference" />
+        <attr name="mdParagraphStyle" format="reference" />
+        <attr name="mdParagraphPostStyle" format="reference" />
+
+        <attr name="mdLinkStyle" format="reference" />
     </declare-styleable>
 </resources>

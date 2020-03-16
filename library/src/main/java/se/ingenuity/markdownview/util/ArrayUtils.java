@@ -2,20 +2,22 @@ package se.ingenuity.markdownview.util;
 
 import androidx.annotation.NonNull;
 
-import se.ingenuity.markdownview.function.IntPredicate;
+import java.util.List;
+
+import se.ingenuity.markdownview.function.ToIntFunction;
 
 class ArrayUtils {
     private ArrayUtils() {
     }
 
-    static boolean any(@NonNull int[] array, @NonNull IntPredicate predicate) {
-        for (int item : array) {
-            if (predicate.test(item)) {
-                return true;
-            }
+    static <T> int[] map(@NonNull List<T> collection,
+                         @NonNull ToIntFunction<T> transformation) {
+        final int[] result = new int[collection.size()];
+        for (int index = 0; index < result.length; index++) {
+            result[index] = transformation.applyAsInt(collection.get(index));
         }
 
-        return false;
+        return result;
     }
 
     static void reverse(@NonNull Object[] array) {
