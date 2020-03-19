@@ -17,9 +17,6 @@ class SpanGenerator {
     private static final int[] TEXT_APPEARANCE_ATTR = {android.R.attr.textAppearance};
 
     @NonNull
-    private static final Object[] SPANS = new Object[2];
-
-    @NonNull
     static Object[] createSpansForStyle(@NonNull Context context, @StyleRes int style) {
         TypedArray attributes = context.obtainStyledAttributes(style, TEXT_APPEARANCE_ATTR);
         @StyleRes final int textAppearance = attributes.getResourceId(0, Constants.ID_NULL);
@@ -30,18 +27,19 @@ class SpanGenerator {
                 attributes.getResourceId(0, Constants.ID_NULL) == textAppearance;
         attributes.recycle();
 
+        final Object[] spans = new Object[2];
         int index = 0;
         if (textAppearance != Constants.ID_NULL && !styleIsTextAppearance) {
-            SPANS[index++] = new TextAppearanceSpan(context, textAppearance);
+            spans[index++] = new TextAppearanceSpan(context, textAppearance);
         }
 
-        SPANS[index++] = new TextAppearanceSpan(context, style);
+        spans[index++] = new TextAppearanceSpan(context, style);
 
-        if (index < SPANS.length) {
-            Arrays.fill(SPANS, index, SPANS.length, null);
+        if (index < spans.length) {
+            Arrays.fill(spans, index, spans.length, null);
         }
 
-        ArrayUtils.reverse(SPANS);
-        return SPANS;
+        ArrayUtils.reverse(spans);
+        return spans;
     }
 }
