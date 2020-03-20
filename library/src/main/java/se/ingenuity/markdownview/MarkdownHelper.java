@@ -53,8 +53,8 @@ class MarkdownHelper {
         @NonNull TypedArray a = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.MarkdownView,
-                defStyleAttr,
-                defStyleRes);
+                markdownDefStyleAttr,
+                markdownDefStyleRes);
 
         @Nullable String markwonFactoryBuilderClassName = a.getString(
                 R.styleable.MarkdownView_markwonFactoryBuilder);
@@ -66,8 +66,8 @@ class MarkdownHelper {
             markwon = parseMarkwon(
                     context,
                     attrs,
-                    markdownDefStyleAttr,
-                    markdownDefStyleRes,
+                    defStyleAttr,
+                    defStyleRes,
                     markwonFactoryBuilderClassName);
 
             if (a.hasValue(R.styleable.MarkdownView_markdown)) {

@@ -2,12 +2,9 @@
 <resources>
     <attr name="markdownStyles" format="reference" />
 
-    <attr name="markdown" format="string|reference" />
-    <attr name="markwonFactoryBuilder" format="string|reference" />
-
     <declare-styleable name="MarkdownView">
-        <attr name="markdown" />
-        <attr name="markwonFactoryBuilder" />
+        <attr name="markdown" format="string|reference" />
+        <attr name="markwonFactoryBuilder" format="string|reference" />
 
         <attr name="mdListItemColor" format="reference|color" />
         <attr name="mdCodeBlockBackgroundColor" format="reference|color" />
