@@ -1,4 +1,4 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

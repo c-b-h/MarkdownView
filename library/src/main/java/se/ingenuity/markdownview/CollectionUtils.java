@@ -1,8 +1,10 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import se.ingenuity.markdownview.function.Predicate;
 

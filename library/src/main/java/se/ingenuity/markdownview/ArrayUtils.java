@@ -1,4 +1,4 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 import androidx.annotation.NonNull;
 

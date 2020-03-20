@@ -1,4 +1,4 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -55,8 +55,8 @@ import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdThematicBreak
 import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemPostStyle;
 import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemPreStyle;
 import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemStyle;
-import static se.ingenuity.markdownview.util.Constants.ID_NULL;
-import static se.ingenuity.markdownview.util.Constants.UNDEFINED_DIMEN;
+import static se.ingenuity.markdownview.Constants.ID_NULL;
+import static se.ingenuity.markdownview.Constants.UNDEFINED_DIMEN;
 
 class ResolvedAttributes {
     @NonNull

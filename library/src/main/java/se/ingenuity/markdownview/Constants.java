@@ -1,4 +1,4 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 class Constants {
     static final int ID_NULL = 0;

@@ -1,4 +1,4 @@
-package se.ingenuity.markdownview.util;
+package se.ingenuity.markdownview;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -44,8 +44,7 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
             @NonNull Context context,
             @Nullable AttributeSet attrs,
             @AttrRes int defStyleAttr,
-            @StyleRes int defStyleRes
-    ) {
+            @StyleRes int defStyleRes) {
         this.context = context;
         this.resolvedAttributes = new ResolvedAttributes(context, attrs, defStyleAttr, defStyleRes);
     }

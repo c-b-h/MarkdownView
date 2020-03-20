@@ -1,6 +1,7 @@
 package se.ingenuity.markdownview;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 
 import androidx.annotation.AttrRes;
@@ -37,7 +38,18 @@ public class MarkdownMaterialTextView extends MaterialTextView {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         markdownHelper = new MarkdownHelper(this);
-        markdownHelper.loadFromAttributes(context, attrs, defStyleAttr, defStyleRes);
+        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, 0);
+    }
+
+    @Override
+    public Parcelable onSaveInstanceState() {
+        return markdownHelper.onSaveInstanceState(super.onSaveInstanceState());
+    }
+
+    @Override
+    public void onRestoreInstanceState(@NonNull Parcelable state) {
+        super.onRestoreInstanceState(markdownHelper.getSuperState(state));
+        markdownHelper.onRestoreInstanceState(state);
     }
 
     public void setMarkdown(@Nullable String markdown) {
