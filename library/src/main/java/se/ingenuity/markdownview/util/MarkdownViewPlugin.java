@@ -20,7 +20,6 @@ import org.commonmark.node.Link;
 import org.commonmark.node.ListItem;
 import org.commonmark.node.Node;
 import org.commonmark.node.Paragraph;
-import org.commonmark.node.SoftLineBreak;
 import org.commonmark.node.StrongEmphasis;
 
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.List;
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonConfiguration;
 import io.noties.markwon.MarkwonSpansFactory;
-import io.noties.markwon.MarkwonVisitor;
 import io.noties.markwon.RenderProps;
 import io.noties.markwon.SpanFactory;
 import io.noties.markwon.core.CoreProps;
@@ -77,11 +75,6 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         if ((dimension = resolvedAttributes.thematicBreakHeight) != Constants.UNDEFINED_DIMEN) {
             builder.thematicBreakHeight(dimension);
         }
-    }
-
-    @Override
-    public void configureVisitor(@NonNull MarkwonVisitor.Builder builder) {
-        builder.on(SoftLineBreak.class, (visitor, softLineBreak) -> visitor.forceNewLine());
     }
 
     @Override
