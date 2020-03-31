@@ -25,24 +25,10 @@ class MarkdownHelper {
     @NonNull
     private final TextView textView;
 
-    @AttrRes
-    private final int markdownDefStyleAttr;
-
-    @StyleRes
-    private final int markdownDefStyleRes;
-
     private Markwon markwon;
 
     MarkdownHelper(@NonNull TextView textView) {
-        this(textView, R.attr.markdownStyles, 0);
-    }
-
-    MarkdownHelper(@NonNull TextView textView,
-                   @AttrRes int markdownDefStyleAttr,
-                   @StyleRes int markdownDefStyleRes) {
         this.textView = textView;
-        this.markdownDefStyleAttr = markdownDefStyleAttr;
-        this.markdownDefStyleRes = markdownDefStyleRes;
     }
 
     void loadFromAttributes(
@@ -53,8 +39,8 @@ class MarkdownHelper {
         @NonNull TypedArray a = context.obtainStyledAttributes(
                 attrs,
                 R.styleable.MarkdownView,
-                markdownDefStyleAttr,
-                markdownDefStyleRes);
+                defStyleAttr,
+                defStyleRes);
 
         @Nullable String markwonFactoryBuilderClassName = a.getString(
                 R.styleable.MarkdownView_markwonFactoryBuilder);

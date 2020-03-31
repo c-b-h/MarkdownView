@@ -183,16 +183,21 @@ class ResolvedAttributes {
     }
 
     static class StyleGroup {
+        private static StyleGroup EMPTY = new StyleGroup(ID_NULL, ID_NULL, ID_NULL);
+
         @NonNull
         static StyleGroup of(@NonNull TypedArray attributes,
                              @StyleableRes int preStyleable,
                              @StyleableRes int styleable,
                              @StyleableRes int postStyleable) {
-            return new StyleGroup(
-                    attributes.getResourceId(preStyleable, ID_NULL),
-                    attributes.getResourceId(styleable, ID_NULL),
-                    attributes.getResourceId(postStyleable, ID_NULL)
-            );
+            final int preStyle = attributes.getResourceId(preStyleable, ID_NULL);
+            final int style = attributes.getResourceId(styleable, ID_NULL);
+            final int postStyle = attributes.getResourceId(postStyleable, ID_NULL);
+            if (preStyle == ID_NULL && style == ID_NULL && postStyle == ID_NULL) {
+                return EMPTY;
+            } else {
+                return new StyleGroup(preStyle, style, postStyle);
+            }
         }
 
         @StyleRes

@@ -34,7 +34,7 @@ import io.noties.markwon.core.MarkwonTheme;
 
 final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
     @NonNull
-    private final Context context;
+    private final SpanGenerator spanGenerator;
     @NonNull
     private final ResolvedAttributes resolvedAttributes;
 
@@ -44,7 +44,7 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
             @AttrRes int defStyleAttr,
             @StyleRes int defStyleRes
     ) {
-        this.context = context;
+        this.spanGenerator = new SpanGenerator(context);
         this.resolvedAttributes = new ResolvedAttributes(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -101,24 +101,24 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         if (styleGroup.hasPreStyle()) {
             builder.appendFactory(
                     node,
-                    ((configuration, props) -> SpanGenerator
-                            .createSpansForStyle(context, styleGroup.preStyle))
+                    ((configuration, props) -> spanGenerator
+                            .createSpansForStyle(styleGroup.preStyle))
             );
         }
 
         if (styleGroup.hasStyle()) {
             builder.setFactory(
                     node,
-                    ((configuration, props) -> SpanGenerator
-                            .createSpansForStyle(context, styleGroup.style))
+                    ((configuration, props) -> spanGenerator
+                            .createSpansForStyle(styleGroup.style))
             );
         }
 
         if (styleGroup.hasPostStyle()) {
             builder.prependFactory(
                     node,
-                    ((configuration, props) -> SpanGenerator
-                            .createSpansForStyle(context, styleGroup.postStyle))
+                    ((configuration, props) -> spanGenerator
+                            .createSpansForStyle(styleGroup.postStyle))
             );
         }
     }
@@ -130,21 +130,21 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         @Nullable final SpanFactory originalFactory = builder.getFactory(Heading.class);
         if (CollectionUtils.any(headingStyleGroups, ResolvedAttributes.StyleGroup::hasPreStyle)) {
             builder.appendFactory(Heading.class, new HeadingSpanFactory(
-                    context,
+                    spanGenerator,
                     null,
                     ArrayUtils.map(headingStyleGroups, (styleGroup) -> styleGroup.preStyle)));
         }
 
         if (CollectionUtils.any(headingStyleGroups, ResolvedAttributes.StyleGroup::hasStyle)) {
             builder.setFactory(Heading.class, new HeadingSpanFactory(
-                    context,
+                    spanGenerator,
                     originalFactory,
                     ArrayUtils.map(headingStyleGroups, (styleGroup) -> styleGroup.style)));
         }
 
         if (CollectionUtils.any(headingStyleGroups, ResolvedAttributes.StyleGroup::hasPostStyle)) {
             builder.setFactory(Heading.class, new HeadingSpanFactory(
-                    context,
+                    spanGenerator,
                     null,
                     ArrayUtils.map(headingStyleGroups, (styleGroup) -> styleGroup.postStyle)));
         }
@@ -159,21 +159,21 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         @Nullable final SpanFactory originalFactory = builder.getFactory(ListItem.class);
         if (ordered.hasPreStyle() || unordered.hasPreStyle()) {
             builder.appendFactory(ListItem.class, new ListItemSpanFactory(
-                    context, null, ordered.preStyle, unordered.preStyle));
+                    spanGenerator, null, ordered.preStyle, unordered.preStyle));
         }
         if (ordered.hasStyle() || unordered.hasStyle()) {
             builder.setFactory(ListItem.class, new ListItemSpanFactory(
-                    context, originalFactory, ordered.style, unordered.style));
+                    spanGenerator, originalFactory, ordered.style, unordered.style));
         }
         if (ordered.hasPostStyle() || unordered.hasPostStyle()) {
             builder.prependFactory(ListItem.class, new ListItemSpanFactory(
-                    context, null, ordered.postStyle, unordered.postStyle));
+                    spanGenerator, null, ordered.postStyle, unordered.postStyle));
         }
     }
 
     private final static class ListItemSpanFactory implements SpanFactory {
         @NonNull
-        private final Context context;
+        private final SpanGenerator spanGenerator;
         @Nullable
         private final SpanFactory originalFactory;
         @StyleRes
@@ -181,11 +181,11 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         @StyleRes
         private final int unorderedStyle;
 
-        ListItemSpanFactory(@NonNull Context context,
+        ListItemSpanFactory(@NonNull SpanGenerator spanGenerator,
                             @Nullable SpanFactory originalFactory,
                             @StyleRes int orderedStyle,
                             @StyleRes int unorderedStyle) {
-            this.context = context;
+            this.spanGenerator = spanGenerator;
             this.originalFactory = originalFactory;
             this.orderedStyle = orderedStyle;
             this.unorderedStyle = unorderedStyle;
@@ -197,10 +197,10 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
                                @NonNull RenderProps props) {
             if (CoreProps.ListItemType.ORDERED == CoreProps.LIST_ITEM_TYPE.require(props) &&
                     ResolvedAttributes.StyleGroup.isStyleValid(orderedStyle)) {
-                return SpanGenerator.createSpansForStyle(context, orderedStyle);
+                return spanGenerator.createSpansForStyle(orderedStyle);
             } else if (CoreProps.ListItemType.BULLET == CoreProps.LIST_ITEM_TYPE.require(props) &&
                     ResolvedAttributes.StyleGroup.isStyleValid(unorderedStyle)) {
-                return SpanGenerator.createSpansForStyle(context, unorderedStyle);
+                return spanGenerator.createSpansForStyle(unorderedStyle);
             } else if (originalFactory != null) {
                 return originalFactory.getSpans(configuration, props);
             }
@@ -210,16 +210,16 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
 
     private static final class HeadingSpanFactory implements SpanFactory {
         @NonNull
-        private final Context context;
+        private final SpanGenerator spanGenerator;
         @Nullable
         private final SpanFactory originalFactory;
         @NonNull
         private final int[] headingStyles;
 
-        HeadingSpanFactory(@NonNull Context context,
+        HeadingSpanFactory(@NonNull SpanGenerator spanGenerator,
                            @Nullable SpanFactory originalFactory,
                            @NonNull int[] headingStyles) {
-            this.context = context;
+            this.spanGenerator = spanGenerator;
             this.originalFactory = originalFactory;
             this.headingStyles = headingStyles;
         }
@@ -232,7 +232,7 @@ final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
             final int indexOfLevel = CoreProps.HEADING_LEVEL.require(props) - 1;
             @StyleRes final int style = headingStyles[indexOfLevel];
             if (ResolvedAttributes.StyleGroup.isStyleValid(style)) {
-                return SpanGenerator.createSpansForStyle(context, style);
+                return spanGenerator.createSpansForStyle(style);
             } else if (originalFactory != null) {
                 return originalFactory.getSpans(configuration, props);
             }

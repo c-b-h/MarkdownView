@@ -58,4 +58,12 @@
 
         <attr name="mdLinkStyle" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="MarkdownView.TextAppearance">
+        <attr name="android:textStyle"/>
+        <attr name="android:textFontWeight"/>
+        <attr name="android:typeface"/>
+        <attr name="android:fontFamily"/>
+        <attr name="fontFamily"/>
+    </declare-styleable>
 </resources>

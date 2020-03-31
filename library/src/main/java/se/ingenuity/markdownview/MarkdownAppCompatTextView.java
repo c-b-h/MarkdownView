@@ -36,7 +36,7 @@ public class MarkdownAppCompatTextView extends AppCompatTextView {
         super(context, attrs, defStyleAttr);
 
         markdownHelper = new MarkdownHelper(this);
-        markdownHelper.loadFromAttributes(context, attrs, defStyleAttr, defStyleRes);
+        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, 0);
     }
 
     public void setMarkdown(@Nullable String markdown) {

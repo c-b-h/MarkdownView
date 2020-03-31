@@ -37,7 +37,7 @@ public class MarkdownMaterialTextView extends MaterialTextView {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         markdownHelper = new MarkdownHelper(this);
-        markdownHelper.loadFromAttributes(context, attrs, defStyleAttr, defStyleRes);
+        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, 0);
     }
 
     public void setMarkdown(@Nullable String markdown) {
