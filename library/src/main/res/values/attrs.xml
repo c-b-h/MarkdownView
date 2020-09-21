@@ -2,6 +2,10 @@
 <resources>
     <attr name="markdownStyles" format="reference" />
 
+    <declare-styleable name="MarkdownTextView.Style">
+        <attr name="mdBackgroundColor" format="reference|color" />
+    </declare-styleable>
+
     <declare-styleable name="MarkdownView">
         <attr name="markdown" format="string|reference" />
         <attr name="markwonFactoryBuilder" format="string|reference" />
@@ -60,10 +64,10 @@
     </declare-styleable>
 
     <declare-styleable name="MarkdownView.TextAppearance">
-        <attr name="android:textStyle"/>
-        <attr name="android:textFontWeight"/>
-        <attr name="android:typeface"/>
-        <attr name="android:fontFamily"/>
-        <attr name="fontFamily"/>
+        <attr name="android:textStyle" />
+        <attr name="android:textFontWeight" />
+        <attr name="android:typeface" />
+        <attr name="android:fontFamily" />
+        <attr name="fontFamily" />
     </declare-styleable>
 </resources>

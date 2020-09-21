@@ -2,8 +2,10 @@ package se.ingenuity.markdownview.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.TextAppearanceSpan;
 
 import androidx.annotation.FontRes;
@@ -18,7 +20,7 @@ import io.noties.markwon.core.spans.CustomTypefaceSpan;
 import se.ingenuity.markdownview.R;
 
 class SpanGenerator {
-    private static boolean CUSTOM_FONT_SUPPORT_IN_SPAN =
+    private static final boolean CUSTOM_FONT_SUPPORT_IN_SPAN =
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     @NonNull
     private static final int[] TEXT_APPEARANCE_ATTR = {android.R.attr.textAppearance};
@@ -31,10 +33,6 @@ class SpanGenerator {
 
     @NonNull
     private final Context context;
-
-    @NonNull
-    private final Object[] spanBuffer =
-            new Object[CUSTOM_FONT_SUPPORT_IN_SPAN ? 2 : 3];
 
     private int style;
 
@@ -58,6 +56,8 @@ class SpanGenerator {
         final boolean styleIsTextAppearance =
                 attributes.getResourceId(0, Constants.ID_NULL) == textAppearance;
         attributes.recycle();
+
+        @NonNull final Object[] spanBuffer = new Object[CUSTOM_FONT_SUPPORT_IN_SPAN ? 3 : 4];
 
         int index = 0;
         if (textAppearance != Constants.ID_NULL && !styleIsTextAppearance) {
@@ -84,6 +84,15 @@ class SpanGenerator {
                 spanBuffer[index++] = CustomTypefaceSpan.create(fontTypeface);
             }
         }
+
+        // Custom attributes
+        attributes = context.obtainStyledAttributes(style, R.styleable.MarkdownTextView_Style);
+        if (attributes.hasValue(R.styleable.MarkdownTextView_Style_mdBackgroundColor)) {
+            spanBuffer[index++] = new BackgroundColorSpan(attributes.getColor(0, Color.TRANSPARENT));
+        }
+
+        attributes.recycle();
+
 
         if (index < spanBuffer.length) {
             Arrays.fill(spanBuffer, index, spanBuffer.length, null);

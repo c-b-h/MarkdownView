@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 22
@@ -29,9 +28,9 @@ android {
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:1.1.0"
-    implementation "io.noties.markwon:core:4.3.0"
+    implementation("androidx.annotation:annotation:1.1.0")
+    implementation("io.noties.markwon:core:4.6.0")
 
-    compileOnly "com.google.android.material:material:1.1.0"
-    compileOnly "androidx.appcompat:appcompat:1.1.0"
+    compileOnly("com.google.android.material:material:1.2.1")
+    compileOnly("androidx.appcompat:appcompat:1.2.0")
 }
