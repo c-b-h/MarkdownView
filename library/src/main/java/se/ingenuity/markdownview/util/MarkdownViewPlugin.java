@@ -32,13 +32,13 @@ import io.noties.markwon.SpanFactory;
 import io.noties.markwon.core.CoreProps;
 import io.noties.markwon.core.MarkwonTheme;
 
-final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
+public final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
     @NonNull
     private final SpanGenerator spanGenerator;
     @NonNull
     private final ResolvedAttributes resolvedAttributes;
 
-    MarkdownViewPlugin(
+    public MarkdownViewPlugin(
             @NonNull Context context,
             @Nullable AttributeSet attrs,
             @AttrRes int defStyleAttr,

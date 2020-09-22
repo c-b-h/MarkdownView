@@ -11,18 +11,12 @@ import androidx.annotation.StyleRes;
 
 import io.noties.markwon.Markwon;
 
-public class MarkwonBuilderFactory {
+public interface MarkwonBuilderFactory {
 
-    @CallSuper
     @NonNull
-    public Markwon.Builder createBuilder(
+    Markwon.Builder createBuilder(
             @NonNull Context context,
             @Nullable AttributeSet attrs,
             @AttrRes int defStyleAttr,
-            @StyleRes int defStyleRes) {
-
-        return Markwon
-                .builder(context)
-                .usePlugin(new MarkdownViewPlugin(context, attrs, defStyleAttr, defStyleRes));
-    }
+            @StyleRes int defStyleRes);
 }
