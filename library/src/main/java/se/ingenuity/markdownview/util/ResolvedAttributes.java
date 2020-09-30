@@ -132,45 +132,45 @@ class ResolvedAttributes {
                         MarkdownView_mdH6PostStyle)
         ));
         emphasisStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdEmphasisStyle,
-                MarkdownView_mdEmphasisStyle,
-                MarkdownView_mdEmphasisStyle);
+                ID_NULL);
         strongEmphasisStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdStrongEmphasisStyle,
-                MarkdownView_mdStrongEmphasisStyle,
-                MarkdownView_mdStrongEmphasisStyle);
+                ID_NULL);
         blockQuoteStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdBlockQuoteStyle,
-                MarkdownView_mdBlockQuoteStyle,
-                MarkdownView_mdBlockQuoteStyle);
+                ID_NULL);
         codeStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdCodeStyle,
-                MarkdownView_mdCodeStyle,
-                MarkdownView_mdCodeStyle);
+                ID_NULL);
         fencedCodeBlockStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdFencedCodeBlockStyle,
-                MarkdownView_mdFencedCodeBlockStyle,
-                MarkdownView_mdFencedCodeBlockStyle);
+                ID_NULL);
         indentedCodeBlockStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdIndentedCodeBlockStyle,
-                MarkdownView_mdIndentedCodeBlockStyle,
-                MarkdownView_mdIndentedCodeBlockStyle);
+                ID_NULL);
         orderedListItemStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdOrderedListItemStyle,
-                MarkdownView_mdOrderedListItemStyle,
-                MarkdownView_mdOrderedListItemStyle);
+                ID_NULL);
         unorderedListItemStyleGroup = StyleGroup.of(a,
-                MarkdownView_mdUnorderedListItemPreStyle,
+                ID_NULL,
                 MarkdownView_mdUnorderedListItemStyle,
-                MarkdownView_mdUnorderedListItemPostStyle);
+                ID_NULL);
         paragraphStyleGroup = StyleGroup.of(a,
-                MarkdownView_mdParagraphPreStyle,
+                ID_NULL,
                 MarkdownView_mdParagraphStyle,
-                MarkdownView_mdParagraphPostStyle);
+                ID_NULL);
         linkStyleGroup = StyleGroup.of(a,
+                ID_NULL,
                 MarkdownView_mdLinkStyle,
-                MarkdownView_mdLinkStyle,
-                MarkdownView_mdLinkStyle);
+                ID_NULL);
 
         listItemColor = a.getColorStateList(MarkdownView_mdListItemColor);
         codeBlockBackgroundColor = a.getColorStateList(MarkdownView_mdCodeBlockBackgroundColor);

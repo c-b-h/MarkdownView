@@ -61,6 +61,7 @@ class MarkdownHelper {
                 defStyleAttr,
                 defStyleRes);
 
+        final boolean hasMarkdown = a.hasValue(R.styleable.MarkdownView_markdown);
         final String markdown = a.getString(R.styleable.MarkdownView_markdown);
 
         @Nullable String markwonFactoryBuilderClassName = a.getString(
@@ -83,7 +84,9 @@ class MarkdownHelper {
             }
         }
 
-        setMarkdown(markdown);
+        if (hasMarkdown) {
+            setMarkdown(markdown);
+        }
     }
 
     void addMarkwonPlugins(boolean update, @NonNull MarkwonPlugin[] includes) {
