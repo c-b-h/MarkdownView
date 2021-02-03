@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.StyleRes;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -30,6 +31,10 @@ import se.ingenuity.markdownview.util.MarkwonBuilderFactory;
 class MarkdownHelper {
     @NonNull
     private static final ThreadLocal<Map<String, Constructor<MarkwonBuilderFactory>>> CONSTRUCTORS =
+            new ThreadLocal<>();
+
+    @NonNull
+    private static final ThreadLocal<Map<String, MarkwonBuilderFactory>> SINGLETONS =
             new ThreadLocal<>();
 
     @NonNull
@@ -162,25 +167,50 @@ class MarkdownHelper {
             @AttrRes int defStyleAttr,
             @StyleRes int defStyleRes,
             @NonNull String name) {
+        @Nullable Map<String, MarkwonBuilderFactory> singletons = SINGLETONS.get();
+        if (singletons == null) {
+            singletons = new LinkedHashMap<>();
+            SINGLETONS.set(singletons);
+        }
+
         try {
+            // try kotlin object first
+            @Nullable MarkwonBuilderFactory singleton = singletons.get(name);
+            if (singleton == null) {
+                singleton = (MarkwonBuilderFactory) Class
+                        .forName(name, false, context.getClassLoader())
+                        .getDeclaredField("INSTANCE")
+                        .get(null);
+                singletons.put(name, singleton);
+            }
+
+            return singleton.createBuilder(context, attrs, defStyleAttr, defStyleRes);
+        } catch (IllegalAccessException | ClassNotFoundException | NoSuchFieldException ignore) {
             @Nullable Map<String, Constructor<MarkwonBuilderFactory>> constructors =
                     CONSTRUCTORS.get();
             if (constructors == null) {
                 constructors = new LinkedHashMap<>();
                 CONSTRUCTORS.set(constructors);
             }
-            @Nullable Constructor<MarkwonBuilderFactory> c = constructors.get(name);
-            if (c == null) {
-                final Class<MarkwonBuilderFactory> clazz =
-                        (Class<MarkwonBuilderFactory>) Class.forName(
-                                name, false, context.getClassLoader());
-                c = clazz.getConstructor();
-                c.setAccessible(true);
-                constructors.put(name, c);
+
+            try {
+                @Nullable Constructor<MarkwonBuilderFactory> constructor = constructors.get(name);
+                if (constructor == null) {
+                    final Class<MarkwonBuilderFactory> clazz = (Class<MarkwonBuilderFactory>) Class
+                            .forName(name, false, context.getClassLoader());
+                    constructor = clazz.getConstructor();
+                    constructor.setAccessible(true);
+                    constructors.put(name, constructor);
+                }
+
+                return constructor.newInstance().createBuilder(context, attrs, defStyleAttr, defStyleRes);
+            } catch (ClassNotFoundException |
+                    NoSuchMethodException |
+                    IllegalAccessException |
+                    InvocationTargetException |
+                    InstantiationException c) {
+                throw new IllegalArgumentException("Could not inflate MarkwonBuilderFactory " + name);
             }
-            return c.newInstance().createBuilder(context, attrs, defStyleAttr, defStyleRes);
-        } catch (Exception e) {
-            throw new RuntimeException("Could not inflate MarkwonBuilderFactory subclass " + name, e);
         }
     }
 

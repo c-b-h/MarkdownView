@@ -40,7 +40,7 @@ public class MarkdownMaterialTextView extends MaterialTextView {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         markdownHelper = new MarkdownHelper(this);
-        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, 0);
+        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, defStyleRes);
     }
 
     @Override

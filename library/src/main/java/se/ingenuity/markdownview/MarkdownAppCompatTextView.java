@@ -39,7 +39,7 @@ public class MarkdownAppCompatTextView extends AppCompatTextView {
         super(context, attrs, defStyleAttr);
 
         markdownHelper = new MarkdownHelper(this);
-        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, 0);
+        markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, defStyleRes);
     }
 
     @Override

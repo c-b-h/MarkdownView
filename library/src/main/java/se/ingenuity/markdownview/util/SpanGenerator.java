@@ -2,48 +2,32 @@ package se.ingenuity.markdownview.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Build;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.text.style.BackgroundColorSpan;
-import android.text.style.TextAppearanceSpan;
+import android.text.style.LineBackgroundSpan;
 
-import androidx.annotation.FontRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 import androidx.annotation.StyleRes;
-import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Arrays;
 
-import io.noties.markwon.core.spans.CustomTypefaceSpan;
 import se.ingenuity.markdownview.R;
+import se.ingenuity.markdownview.util.span.TextAppearanceSpanCompat;
 
 class SpanGenerator {
-    private static final boolean CUSTOM_FONT_SUPPORT_IN_SPAN =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     @NonNull
     private static final int[] TEXT_APPEARANCE_ATTR = {android.R.attr.textAppearance};
-
-    private static final int TEXT_FONT_WEIGHT_UNSPECIFIED = -1;
-
-    private static final int SANS = 1;
-    private static final int SERIF = 2;
-    private static final int MONOSPACE = 3;
 
     @NonNull
     private final Context context;
 
-    private int style;
-
-    private int fontWeight;
-
-    @Nullable
-    private Typeface fontTypeface;
-
     SpanGenerator(@NonNull Context context) {
         this.context = context;
-        reset();
     }
 
     @NonNull
@@ -57,132 +41,68 @@ class SpanGenerator {
                 attributes.getResourceId(0, Constants.ID_NULL) == textAppearance;
         attributes.recycle();
 
-        @NonNull final Object[] spanBuffer = new Object[CUSTOM_FONT_SUPPORT_IN_SPAN ? 3 : 4];
+        @NonNull final Object[] buffer = new Object[4];
 
         int index = 0;
         if (textAppearance != Constants.ID_NULL && !styleIsTextAppearance) {
-            spanBuffer[index++] = new TextAppearanceSpan(context, textAppearance);
-
-            if (!CUSTOM_FONT_SUPPORT_IN_SPAN) {
-                attributes = context.obtainStyledAttributes(textAppearance,
-                        R.styleable.MarkdownView_TextAppearance);
-
-                updateTypefaceAndStyle(attributes);
-            }
-
-            attributes.recycle();
+            buffer[index++] = new TextAppearanceSpanCompat(context, textAppearance);
         }
 
-        spanBuffer[index++] = new TextAppearanceSpan(context, style);
-        if (!CUSTOM_FONT_SUPPORT_IN_SPAN) {
-            attributes = context.obtainStyledAttributes(style,
-                    R.styleable.MarkdownView_TextAppearance);
-            updateTypefaceAndStyle(attributes);
-            attributes.recycle();
-
-            if (fontTypeface != null) {
-                spanBuffer[index++] = CustomTypefaceSpan.create(fontTypeface);
-            }
-        }
+        buffer[index++] = new TextAppearanceSpanCompat(context, style);
 
         // Custom attributes
         attributes = context.obtainStyledAttributes(style, R.styleable.MarkdownTextView_Style);
         if (attributes.hasValue(R.styleable.MarkdownTextView_Style_mdBackgroundColor)) {
-            spanBuffer[index++] = new BackgroundColorSpan(attributes.getColor(0, Color.TRANSPARENT));
+            buffer[index++] = new BackgroundColorSpan(attributes.getColor(0, Color.TRANSPARENT));
         }
 
         attributes.recycle();
 
+        Arrays.fill(buffer, index, buffer.length, null);
 
-        if (index < spanBuffer.length) {
-            Arrays.fill(spanBuffer, index, spanBuffer.length, null);
-        }
-
-        ArrayUtils.reverse(spanBuffer);
-        reset();
-        return spanBuffer;
+        ArrayUtils.reverse(buffer);
+        return buffer;
     }
 
-    private void updateTypefaceAndStyle(@NonNull TypedArray a) {
-        style = a.getInt(R.styleable.MarkdownView_TextAppearance_android_textStyle, style);
+    private static class Standard implements LineBackgroundSpan {
+        private final int mColor;
+        private Rect mBgRect = new Rect();
+        private int mPadding = 20;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            fontWeight = a.getInt(R.styleable.MarkdownView_TextAppearance_android_textFontWeight,
-                    TEXT_FONT_WEIGHT_UNSPECIFIED);
-            if (fontWeight != TEXT_FONT_WEIGHT_UNSPECIFIED) {
-                style = Typeface.NORMAL | (style & Typeface.ITALIC);
-            }
+        /**
+         * Constructor taking a color integer.
+         *
+         * @param color Color integer that defines the background color.
+         */
+        public Standard(@ColorInt int color) {
+            mColor = color;
         }
 
-        if (a.hasValue(R.styleable.MarkdownView_TextAppearance_android_fontFamily)
-                || a.hasValue(R.styleable.MarkdownView_TextAppearance_fontFamily)) {
-            fontTypeface = null;
-            int fontFamilyId = a.hasValue(R.styleable.MarkdownView_TextAppearance_fontFamily)
-                    ? R.styleable.MarkdownView_TextAppearance_fontFamily
-                    : R.styleable.MarkdownView_TextAppearance_android_fontFamily;
-//            final int fontWeight = this.fontWeight;
-//            final int style = this.style;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                if (!context.isRestricted()) {
-                    final Typeface typeface = a.getFont(fontFamilyId);
-                    if (typeface != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
-                                && this.fontWeight != TEXT_FONT_WEIGHT_UNSPECIFIED) {
-                            fontTypeface = Typeface.create(
-                                    Typeface.create(typeface, Typeface.NORMAL), this.fontWeight,
-                                    (this.style & Typeface.ITALIC) != 0);
-                        } else {
-                            fontTypeface = typeface;
-                        }
-                    }
-                }
-            } else {
-                @FontRes final int fontRes = a.getResourceId(fontFamilyId, Constants.ID_NULL);
-                if (fontRes != Constants.ID_NULL) {
-                    fontTypeface = ResourcesCompat.getFont(context, fontRes);
-                }
-            }
-
-            if (fontTypeface == null) {
-                // Try with String. This is done by TextView JB+, but fails in ICS
-                String fontFamilyName = a.getString(fontFamilyId);
-                if (fontFamilyName != null) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
-                            && this.fontWeight != TEXT_FONT_WEIGHT_UNSPECIFIED) {
-                        fontTypeface = Typeface.create(
-                                Typeface.create(fontFamilyName, Typeface.NORMAL), this.fontWeight,
-                                (this.style & Typeface.ITALIC) != 0);
-                    } else {
-                        fontTypeface = Typeface.create(fontFamilyName, this.style);
-                    }
-                }
-            }
-            return;
+        /**
+         * @return the color of this span.
+         * @see Standard#Standard(int)
+         */
+        @ColorInt
+        public final int getColor() {
+            return mColor;
         }
 
-        if (a.hasValue(R.styleable.MarkdownView_TextAppearance_android_typeface)) {
-            int typefaceIndex = a.getInt(R.styleable.MarkdownView_TextAppearance_android_typeface, SANS);
-            switch (typefaceIndex) {
-                case SANS:
-                    fontTypeface = Typeface.SANS_SERIF;
-                    break;
-
-                case SERIF:
-                    fontTypeface = Typeface.SERIF;
-                    break;
-
-                case MONOSPACE:
-                    fontTypeface = Typeface.MONOSPACE;
-                    break;
-            }
+        @Override
+        public void drawBackground(@NonNull Canvas canvas, @NonNull Paint paint,
+                                   @Px int left, @Px int right,
+                                   @Px int top, @Px int baseline, @Px int bottom,
+                                   @NonNull CharSequence text, int start, int end,
+                                   int lineNumber) {
+            final int textWidth = Math.round(paint.measureText(text, start, end));
+            final int paintColor = paint.getColor();
+            // Draw the background
+            mBgRect.set(left - mPadding,
+                    top - (lineNumber == 0 ? mPadding / 2 : -(mPadding / 2)),
+                    left + textWidth + mPadding,
+                    bottom + mPadding / 2);
+            paint.setColor(mColor);
+            canvas.drawRect(mBgRect, paint);
+            paint.setColor(paintColor);
         }
-    }
-
-    private void reset() {
-        this.style = Typeface.NORMAL;
-
-        this.fontWeight = TEXT_FONT_WEIGHT_UNSPECIFIED;
-
-        this.fontTypeface = null;
     }
 }
