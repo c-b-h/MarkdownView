@@ -24,5 +24,5 @@
 # *MarkdownView resolves MarkwonBuilderFactory with reflection.
 -keep public class * extends se.ingenuity.markdownview.util.MarkwonBuilderFactory {
     public <init>();
-    public io.noties.markwon.Markwon.Builder createBuilder(android.content.Context, android.util.AttributeSet, int, int);
+    public io.noties.markwon.Markwon$Builder createBuilder(android.content.Context, android.util.AttributeSet, int, int);
 }

@@ -67,7 +67,7 @@ class MarkdownHelper {
                 defStyleRes);
 
         final boolean hasMarkdown = a.hasValue(R.styleable.MarkdownView_markdown);
-        final String markdown = a.getString(R.styleable.MarkdownView_markdown);
+        @Nullable final String markdown = a.getString(R.styleable.MarkdownView_markdown);
 
         @Nullable String markwonFactoryBuilderClassName = a.getString(
                 R.styleable.MarkdownView_markwonFactoryBuilder);
