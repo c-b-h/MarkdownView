@@ -43,6 +43,7 @@ public class MarkdownMaterialTextView extends MaterialTextView {
         markdownHelper.loadFromAttributes(context, attrs, R.attr.markdownStyles, defStyleRes);
     }
 
+    @NonNull
     @Override
     public Parcelable onSaveInstanceState() {
         return markdownHelper.onSaveInstanceState(super.onSaveInstanceState());

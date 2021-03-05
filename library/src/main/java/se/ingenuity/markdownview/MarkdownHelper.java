@@ -81,7 +81,17 @@ class MarkdownHelper {
                         defStyleAttr,
                         defStyleRes,
                         markwonFactoryBuilderClassName));
-                if (!pending.plugins.contains(plugin)) {
+                boolean factoryContainsMarkdownViewPlugin = false;
+                for (final MarkwonPlugin plugin : pending.plugins) {
+                    if (plugin instanceof MarkdownViewPlugin) {
+                        factoryContainsMarkdownViewPlugin = true;
+                        break;
+                    }
+                }
+
+                if (!factoryContainsMarkdownViewPlugin) {
+                    // Ensure MarkdownViewPlugin if factory not pointing to one already otherwise
+                    // `this` class has no purpose.
                     pending.plugins.add(0, plugin);
                 }
             } finally {

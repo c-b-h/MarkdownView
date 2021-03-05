@@ -4,6 +4,10 @@
 
     <declare-styleable name="MarkdownTextView.Style">
         <attr name="mdBackgroundColor" format="reference|color" />
+        <attr name="mdLineBackground" format="reference|color" />
+        <attr name="mdLineBackgroundPadding" format="dimension|enum">
+            <enum name="intrinsic" value="-1" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="MarkdownView">
