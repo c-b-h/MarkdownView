@@ -12,7 +12,7 @@ import android.text.style.LineHeightSpan;
 import android.text.style.MetricAffectingSpan;
 
 import androidx.annotation.FontRes;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import se.ingenuity.markdownview.R;
@@ -65,8 +65,8 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
 
     private final boolean mHasElegantTextHeight = false;
     private final boolean mElegantTextHeight = false;
-    private final boolean mHasLetterSpacing = false;
-    private final float mLetterSpacing = -1f;
+    private final boolean mHasLetterSpacing;
+    private final float mLetterSpacing;
 
     private final int mLineHeight;
 
@@ -102,7 +102,7 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
         mTextColorLink = a.getColorStateList(R.styleable.TextAppearance_android_textColorLink);
         mTextSize = a.getDimensionPixelSize(R.styleable.TextAppearance_android_textSize, -1);
 
-        mStyle = a.getInt(R.styleable.TextAppearance_android_textStyle, 0);
+        mStyle = a.getInt(R.styleable.TextAppearance_android_textStyle, Typeface.NORMAL);
 
         @FontRes final int fontRes = a.getResourceId(fontFamilyId, -1);
         if (fontRes != -1) {
@@ -118,7 +118,7 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
             if (family != null) {
                 mFamilyName = family;
             } else {
-                int tf = a.getInt(R.styleable.TextAppearance_android_typeface, 0);
+                final int tf = a.getInt(R.styleable.TextAppearance_android_typeface, 0);
 
                 switch (tf) {
                     case 1:
@@ -163,17 +163,18 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
 //                .TextAppearance_elegantTextHeight);
 //        mElegantTextHeight = a.getBoolean(R.styleable
 //                .TextAppearance_elegantTextHeight, false);
-
-//        mHasLetterSpacing = a.hasValue(R.styleable
-//                .TextAppearance_letterSpacing);
-//        mLetterSpacing = a.getFloat(R.styleable
-//                .TextAppearance_letterSpacing, 0.0f);
-
-//        mFontFeatureSettings = a.getString(R.styleable.TextAppearance_fontFeatureSettings);
-
         mFontVariationSettings = a.getString(R.styleable.TextAppearance_fontVariationSettings);
-
         a.recycle();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            a = context.obtainStyledAttributes(appearance, R.styleable.MaterialTextAppearance);
+            mHasLetterSpacing = a.hasValue(R.styleable.MaterialTextAppearance_android_letterSpacing);
+            mLetterSpacing = a.getFloat(R.styleable.MaterialTextAppearance_android_letterSpacing, 0);
+            a.recycle();
+        } else {
+            mHasLetterSpacing = false;
+            mLetterSpacing = 0;
+        }
 
         a = context.obtainStyledAttributes(appearance, R.styleable.MaterialTextAppearance);
         final int lineHeightId = a.hasValue(R.styleable.MaterialTextAppearance_lineHeight)
@@ -193,252 +194,8 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
         mTextColor = textColor;
     }
 
-    /**
-     * Makes text be drawn with the specified typeface, size, style,
-     * and colors.
-     */
-//    public TextAppearanceSpanCompat(String family, int style, int size,
-//                                    ColorStateList color, ColorStateList linkColor) {
-//        mFamilyName = family;
-//        mStyle = style;
-//        mTextSize = size;
-//        mTextColor = color;
-//        mTextColorLink = linkColor;
-//        mTypeface = null;
-//
-//        mTextFontWeight = -1;
-//        mTextLocales = null;
-//
-//        mShadowRadius = 0.0f;
-//        mShadowDx = 0.0f;
-//        mShadowDy = 0.0f;
-//        mShadowColor = 0;
-//
-//        mHasElegantTextHeight = false;
-//        mElegantTextHeight = false;
-//        mHasLetterSpacing = false;
-//        mLetterSpacing = 0.0f;
-//
-//        mFontFeatureSettings = null;
-//        mFontVariationSettings = null;
-//    }
-
-//    public TextAppearanceSpanCompat(Parcel src) {
-//        mFamilyName = src.readString();
-//        mStyle = src.readInt();
-//        mTextSize = src.readInt();
-//        if (src.readInt() != 0) {
-//            mTextColor = ColorStateList.CREATOR.createFromParcel(src);
-//        } else {
-//            mTextColor = null;
-//        }
-//        if (src.readInt() != 0) {
-//            mTextColorLink = ColorStateList.CREATOR.createFromParcel(src);
-//        } else {
-//            mTextColorLink = null;
-//        }
-//        mTypeface = LeakyTypefaceStorage.readTypefaceFromParcel(src);
-//
-//        mTextFontWeight = src.readInt();
-//        mTextLocales = src.readParcelable(LocaleList.class.getClassLoader());
-//
-//        mShadowRadius = src.readFloat();
-//        mShadowDx = src.readFloat();
-//        mShadowDy = src.readFloat();
-//        mShadowColor = src.readInt();
-//
-//        mHasElegantTextHeight = src.readBoolean();
-//        mElegantTextHeight = src.readBoolean();
-//        mHasLetterSpacing = src.readBoolean();
-//        mLetterSpacing = src.readFloat();
-//
-//        mFontFeatureSettings = src.readString();
-//        mFontVariationSettings = src.readString();
-//    }
-
-//    public int getSpanTypeId() {
-//        return getSpanTypeIdInternal();
-//    }
-
-//    /**
-//     * @hide
-//     */
-//    public int getSpanTypeIdInternal() {
-//        return TextUtils.TEXT_APPEARANCE_SPAN;
-//    }
-
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    public void writeToParcel(Parcel dest, int flags) {
-//        writeToParcelInternal(dest, flags);
-//    }
-
-//    /**
-//     * @hide
-//     */
-//    public void writeToParcelInternal(Parcel dest, int flags) {
-//        dest.writeString(mFamilyName);
-//        dest.writeInt(mStyle);
-//        dest.writeInt(mTextSize);
-//        if (mTextColor != null) {
-//            dest.writeInt(1);
-//            mTextColor.writeToParcel(dest, flags);
-//        } else {
-//            dest.writeInt(0);
-//        }
-//        if (mTextColorLink != null) {
-//            dest.writeInt(1);
-//            mTextColorLink.writeToParcel(dest, flags);
-//        } else {
-//            dest.writeInt(0);
-//        }
-//        LeakyTypefaceStorage.writeTypefaceToParcel(mTypeface, dest);
-//
-//        dest.writeInt(mTextFontWeight);
-//        dest.writeParcelable(mTextLocales, flags);
-//
-//        dest.writeFloat(mShadowRadius);
-//        dest.writeFloat(mShadowDx);
-//        dest.writeFloat(mShadowDy);
-//        dest.writeInt(mShadowColor);
-//
-//        dest.writeBoolean(mHasElegantTextHeight);
-//        dest.writeBoolean(mElegantTextHeight);
-//        dest.writeBoolean(mHasLetterSpacing);
-//        dest.writeFloat(mLetterSpacing);
-//
-//        dest.writeString(mFontFeatureSettings);
-//        dest.writeString(mFontVariationSettings);
-//    }
-
-    /**
-     * Returns the typeface family specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    public String getFamily() {
-        return mFamilyName;
-    }
-
-    /**
-     * Returns the text color specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    public ColorStateList getTextColor() {
-        return mTextColor;
-    }
-
-    /**
-     * Returns the link color specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    public ColorStateList getLinkTextColor() {
-        return mTextColorLink;
-    }
-
-    /**
-     * Returns the text size specified by this span, or <code>-1</code>
-     * if it does not specify one.
-     */
-    public int getTextSize() {
-        return mTextSize;
-    }
-
-    /**
-     * Returns the text style specified by this span, or <code>0</code>
-     * if it does not specify one.
-     */
-    public int getTextStyle() {
-        return mStyle;
-    }
-
-    /**
-     * Returns the text font weight specified by this span, or <code>-1</code>
-     * if it does not specify one.
-     */
-    public int getTextFontWeight() {
-        return mTextFontWeight;
-    }
-
-    /**
-     * Returns the {@link android.os.LocaleList} specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    @Nullable
-    public LocaleList getTextLocales() {
-        return mTextLocales;
-    }
-
-    /**
-     * Returns the typeface specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    @Nullable
-    public Typeface getTypeface() {
-        return mTypeface;
-    }
-
-    /**
-     * Returns the color of the text shadow specified by this span, or <code>0</code>
-     * if it does not specify one.
-     */
-    public int getShadowColor() {
-        return mShadowColor;
-    }
-
-    /**
-     * Returns the horizontal offset of the text shadow specified by this span, or <code>0.0f</code>
-     * if it does not specify one.
-     */
-    public float getShadowDx() {
-        return mShadowDx;
-    }
-
-    /**
-     * Returns the vertical offset of the text shadow specified by this span, or <code>0.0f</code>
-     * if it does not specify one.
-     */
-    public float getShadowDy() {
-        return mShadowDy;
-    }
-
-    /**
-     * Returns the blur radius of the text shadow specified by this span, or <code>0.0f</code>
-     * if it does not specify one.
-     */
-    public float getShadowRadius() {
-        return mShadowRadius;
-    }
-
-    /**
-     * Returns the font feature settings specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    @Nullable
-    public String getFontFeatureSettings() {
-        return mFontFeatureSettings;
-    }
-
-    /**
-     * Returns the font variation settings specified by this span, or <code>null</code>
-     * if it does not specify one.
-     */
-    @Nullable
-    public String getFontVariationSettings() {
-        return mFontVariationSettings;
-    }
-
-    /**
-     * Returns the value of elegant height metrics flag specified by this span,
-     * or <code>false</code> if it does not specify one.
-     */
-    public boolean isElegantTextHeight() {
-        return mElegantTextHeight;
-    }
-
     @Override
-    public void updateDrawState(TextPaint ds) {
+    public void updateDrawState(@NonNull TextPaint ds) {
         updateMeasureState(ds);
 
         if (mTextColor != null) {
@@ -455,12 +212,12 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
     }
 
     @Override
-    public void updateMeasureState(TextPaint ds) {
-        final Typeface tf = ds.getTypeface();
+    public void updateMeasureState(@NonNull TextPaint ds) {
+        final Typeface currentTypeface = ds.getTypeface();
 
         final int style;
-        if (tf != null) {
-            style = tf.getStyle() | mStyle;
+        if (currentTypeface != null) {
+            style = currentTypeface.getStyle() | mStyle;
         } else {
             style = mStyle;
         }
@@ -468,13 +225,13 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
         final Typeface styledTypeface;
         if (mTypeface != null) {
             styledTypeface = Typeface.create(mTypeface, style);
-        } else if (mFamilyName != null) {
+        } else if (mFamilyName != null || style != Typeface.NORMAL) {
             if (mFamilyName != null) {
                 styledTypeface = Typeface.create(mFamilyName, style);
-            } else if (tf == null) {
+            } else if (currentTypeface == null) {
                 styledTypeface = Typeface.defaultFromStyle(style);
             } else {
-                styledTypeface = Typeface.create(tf, style);
+                styledTypeface = Typeface.create(currentTypeface, style);
             }
         } else {
             styledTypeface = null;
@@ -542,7 +299,7 @@ public class TextAppearanceSpanCompat extends MetricAffectingSpan implements Lin
             Paint.FontMetricsInt fm
     ) {
         final int originHeight = fm.descent - fm.ascent;
-        // If original height is not positive, do nothing.
+        // If original height is negative, do nothing.
         if (originHeight <= 0 || mLineHeight < 0) {
             return;
         }

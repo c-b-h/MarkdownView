@@ -10,7 +10,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="MarkdownView">
+    <declare-styleable name="MarkdownView" parent="MaterialTextView">
         <attr name="markdown" format="string|reference" />
         <attr name="markwonFactoryBuilder" format="string|reference" />
 
