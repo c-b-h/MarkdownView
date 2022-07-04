@@ -62,15 +62,15 @@ class MarkdownHelper {
 
         @NonNull TypedArray a = context.obtainStyledAttributes(
                 attrs,
-                R.styleable.MarkdownView,
+                R.styleable.MarkdownTextView,
                 defStyleAttr,
                 defStyleRes);
 
-        final boolean hasMarkdown = a.hasValue(R.styleable.MarkdownView_markdown);
-        @Nullable final String markdown = a.getString(R.styleable.MarkdownView_markdown);
+        final boolean hasMarkdown = a.hasValue(R.styleable.MarkdownTextView_markdown);
+        @Nullable final String markdown = a.getString(R.styleable.MarkdownTextView_markdown);
 
         @Nullable String markwonFactoryBuilderClassName = a.getString(
-                R.styleable.MarkdownView_markwonFactoryBuilder);
+                R.styleable.MarkdownTextView_markwonFactoryBuilder);
         if (markwonFactoryBuilderClassName == null) {
             ensureBuilder();
         } else {
@@ -281,18 +281,18 @@ class MarkdownHelper {
         @Nullable
         final String markdown;
 
-        protected SS(@NonNull Parcelable superState, @Nullable String markdown) {
+        SS(@NonNull Parcelable superState, @Nullable String markdown) {
             super(superState);
             this.markdown = markdown;
         }
 
-        protected SS(@NonNull Parcel source) {
+        SS(@NonNull Parcel source) {
             super(source);
             markdown = source.readString();
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
-        protected SS(@NonNull Parcel source, @Nullable ClassLoader loader) {
+        SS(@NonNull Parcel source, @Nullable ClassLoader loader) {
             super(source, loader);
             markdown = source.readString();
         }

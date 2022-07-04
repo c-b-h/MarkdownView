@@ -13,7 +13,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 import io.noties.markwon.MarkwonPlugin;
 
-public class MarkdownMaterialTextView extends MaterialTextView {
+public class MarkdownMaterialTextView extends MaterialTextView implements MarkdownView {
     @NonNull
     private final MarkdownHelper markdownHelper;
 
@@ -55,14 +55,17 @@ public class MarkdownMaterialTextView extends MaterialTextView {
         markdownHelper.onRestoreInstanceState(state);
     }
 
+    @Override
     public void setMarkdown(@Nullable String markdown) {
         markdownHelper.setMarkdown(markdown);
     }
 
+    @Override
     public void addMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.addMarkwonPlugins(update, plugins);
     }
 
+    @Override
     public void removeMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.removeMarkwonPlugins(update, plugins);
     }

@@ -1,5 +1,44 @@
 package se.ingenuity.markdownview.util;
 
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdBlockQuoteStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdCodeBlockBackgroundColor;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdCodeBlockMargin;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdCodeBlockTextColor;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdCodeStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdEmphasisStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdFencedCodeBlockStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH1PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH1PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH1Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH2PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH2PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH2Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH3PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH3PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH3Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH4PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH4PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH4Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH5PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH5PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH5Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH6PostStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH6PreStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdH6Style;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdIndentedCodeBlockStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdLinkStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdLinkUnderlined;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdListItemColor;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdOrderedListItemStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdParagraphStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdStrongEmphasisStyle;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdThematicBreakColor;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdThematicBreakHeight;
+import static se.ingenuity.markdownview.R.styleable.MarkdownTextView_mdUnorderedListItemStyle;
+import static se.ingenuity.markdownview.util.Constants.ID_NULL;
+import static se.ingenuity.markdownview.util.Constants.UNDEFINED_DIMEN;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -15,48 +54,6 @@ import androidx.annotation.StyleableRes;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static se.ingenuity.markdownview.R.styleable.MarkdownView;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdBlockQuoteStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdCodeBlockBackgroundColor;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdCodeBlockMargin;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdCodeBlockTextColor;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdCodeStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdEmphasisStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdFencedCodeBlockStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH1PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH1PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH1Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH2PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH2PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH2Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH3PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH3PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH3Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH4PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH4PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH4Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH5PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH5PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH5Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH6PostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH6PreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdH6Style;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdIndentedCodeBlockStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdLinkStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdListItemColor;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdOrderedListItemStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdParagraphPostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdParagraphPreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdParagraphStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdStrongEmphasisStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdThematicBreakColor;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdThematicBreakHeight;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemPostStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemPreStyle;
-import static se.ingenuity.markdownview.R.styleable.MarkdownView_mdUnorderedListItemStyle;
-import static se.ingenuity.markdownview.util.Constants.ID_NULL;
-import static se.ingenuity.markdownview.util.Constants.UNDEFINED_DIMEN;
 
 class ResolvedAttributes {
     @NonNull
@@ -83,6 +80,9 @@ class ResolvedAttributes {
     final StyleGroup linkStyleGroup;
 
     @Nullable
+    final Boolean linkUnderlined;
+
+    @Nullable
     final ColorStateList listItemColor;
     @Nullable
     final ColorStateList codeBlockBackgroundColor;
@@ -101,83 +101,94 @@ class ResolvedAttributes {
                        @StyleRes int defStyleRes) {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs,
-                MarkdownView,
+                MarkdownTextView,
                 defStyleAttr,
                 defStyleRes);
 
         headingStyleGroups = Collections.unmodifiableList(Arrays.asList(
                 StyleGroup.of(a,
-                        MarkdownView_mdH1PreStyle,
-                        MarkdownView_mdH1Style,
-                        MarkdownView_mdH1PostStyle),
+                        MarkdownTextView_mdH1PreStyle,
+                        MarkdownTextView_mdH1Style,
+                        MarkdownTextView_mdH1PostStyle),
                 StyleGroup.of(a,
-                        MarkdownView_mdH2PreStyle,
-                        MarkdownView_mdH2Style,
-                        MarkdownView_mdH2PostStyle),
+                        MarkdownTextView_mdH2PreStyle,
+                        MarkdownTextView_mdH2Style,
+                        MarkdownTextView_mdH2PostStyle),
                 StyleGroup.of(a,
-                        MarkdownView_mdH3PreStyle,
-                        MarkdownView_mdH3Style,
-                        MarkdownView_mdH3PostStyle),
+                        MarkdownTextView_mdH3PreStyle,
+                        MarkdownTextView_mdH3Style,
+                        MarkdownTextView_mdH3PostStyle),
                 StyleGroup.of(a,
-                        MarkdownView_mdH4PreStyle,
-                        MarkdownView_mdH4Style,
-                        MarkdownView_mdH4PostStyle),
+                        MarkdownTextView_mdH4PreStyle,
+                        MarkdownTextView_mdH4Style,
+                        MarkdownTextView_mdH4PostStyle),
                 StyleGroup.of(a,
-                        MarkdownView_mdH5PreStyle,
-                        MarkdownView_mdH5Style,
-                        MarkdownView_mdH5PostStyle),
+                        MarkdownTextView_mdH5PreStyle,
+                        MarkdownTextView_mdH5Style,
+                        MarkdownTextView_mdH5PostStyle),
                 StyleGroup.of(a,
-                        MarkdownView_mdH6PreStyle,
-                        MarkdownView_mdH6Style,
-                        MarkdownView_mdH6PostStyle)
+                        MarkdownTextView_mdH6PreStyle,
+                        MarkdownTextView_mdH6Style,
+                        MarkdownTextView_mdH6PostStyle)
         ));
         emphasisStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdEmphasisStyle,
+                MarkdownTextView_mdEmphasisStyle,
                 ID_NULL);
         strongEmphasisStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdStrongEmphasisStyle,
+                MarkdownTextView_mdStrongEmphasisStyle,
                 ID_NULL);
         blockQuoteStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdBlockQuoteStyle,
+                MarkdownTextView_mdBlockQuoteStyle,
                 ID_NULL);
         codeStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdCodeStyle,
+                MarkdownTextView_mdCodeStyle,
                 ID_NULL);
         fencedCodeBlockStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdFencedCodeBlockStyle,
+                MarkdownTextView_mdFencedCodeBlockStyle,
                 ID_NULL);
         indentedCodeBlockStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdIndentedCodeBlockStyle,
+                MarkdownTextView_mdIndentedCodeBlockStyle,
                 ID_NULL);
         orderedListItemStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdOrderedListItemStyle,
+                MarkdownTextView_mdOrderedListItemStyle,
                 ID_NULL);
         unorderedListItemStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdUnorderedListItemStyle,
+                MarkdownTextView_mdUnorderedListItemStyle,
                 ID_NULL);
         paragraphStyleGroup = StyleGroup.of(a,
                 ID_NULL,
-                MarkdownView_mdParagraphStyle,
-                ID_NULL);
-        linkStyleGroup = StyleGroup.of(a,
-                ID_NULL,
-                MarkdownView_mdLinkStyle,
+                MarkdownTextView_mdParagraphStyle,
                 ID_NULL);
 
-        listItemColor = a.getColorStateList(MarkdownView_mdListItemColor);
-        codeBlockBackgroundColor = a.getColorStateList(MarkdownView_mdCodeBlockBackgroundColor);
-        codeBlockTextColor = a.getColorStateList(MarkdownView_mdCodeBlockTextColor);
-        codeBlockMargin = a.getDimensionPixelSize(MarkdownView_mdCodeBlockMargin, UNDEFINED_DIMEN);
-        thematicBreakColor = a.getColorStateList(MarkdownView_mdThematicBreakColor);
-        thematicBreakHeight = a.getDimensionPixelSize(MarkdownView_mdThematicBreakHeight, UNDEFINED_DIMEN);
+        codeBlockBackgroundColor = a.getColorStateList(MarkdownTextView_mdCodeBlockBackgroundColor);
+        codeBlockMargin = a.getDimensionPixelSize(MarkdownTextView_mdCodeBlockMargin, UNDEFINED_DIMEN);
+        codeBlockTextColor = a.getColorStateList(MarkdownTextView_mdCodeBlockTextColor);
+
+        if (a.hasValue(MarkdownTextView_mdLinkUnderlined)) {
+            linkUnderlined = a.getBoolean(MarkdownTextView_mdLinkUnderlined, true);
+            linkStyleGroup = StyleGroup.of(a,
+                    ID_NULL,
+                    MarkdownTextView_mdLinkStyle,
+                    ID_NULL);
+        } else {
+            linkUnderlined = null;
+            linkStyleGroup = StyleGroup.of(a,
+                    ID_NULL,
+                    ID_NULL,
+                    MarkdownTextView_mdLinkStyle);
+        }
+
+        listItemColor = a.getColorStateList(MarkdownTextView_mdListItemColor);
+        thematicBreakColor = a.getColorStateList(MarkdownTextView_mdThematicBreakColor);
+        thematicBreakHeight = a.getDimensionPixelSize(MarkdownTextView_mdThematicBreakHeight, UNDEFINED_DIMEN);
 
         a.recycle();
     }
@@ -190,9 +201,9 @@ class ResolvedAttributes {
                              @StyleableRes int preStyleable,
                              @StyleableRes int styleable,
                              @StyleableRes int postStyleable) {
-            final int preStyle = attributes.getResourceId(preStyleable, ID_NULL);
-            final int style = attributes.getResourceId(styleable, ID_NULL);
-            final int postStyle = attributes.getResourceId(postStyleable, ID_NULL);
+            final int preStyle = preStyleable == ID_NULL ? ID_NULL : attributes.getResourceId(preStyleable, ID_NULL);
+            final int style = styleable == ID_NULL ? ID_NULL : attributes.getResourceId(styleable, ID_NULL);
+            final int postStyle = postStyleable == ID_NULL ? ID_NULL : attributes.getResourceId(postStyleable, ID_NULL);
             if (preStyle == ID_NULL && style == ID_NULL && postStyle == ID_NULL) {
                 return EMPTY;
             } else {

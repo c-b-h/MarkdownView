@@ -75,6 +75,11 @@ public final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         if ((dimension = resolvedAttributes.thematicBreakHeight) != Constants.UNDEFINED_DIMEN) {
             builder.thematicBreakHeight(dimension);
         }
+
+        Boolean bool;
+        if ((bool = resolvedAttributes.linkUnderlined) != null) {
+            builder.isLinkUnderlined(bool);
+        }
     }
 
     @Override
@@ -102,7 +107,7 @@ public final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
             builder.appendFactory(
                     node,
                     ((configuration, props) -> spanGenerator
-                            .createSpansForStyle(styleGroup.preStyle))
+                            .createSpansForStyle(styleGroup.style))
             );
         }
 
@@ -143,7 +148,7 @@ public final class MarkdownViewPlugin extends AbstractMarkwonPlugin {
         }
 
         if (CollectionUtils.any(headingStyleGroups, ResolvedAttributes.StyleGroup::hasPostStyle)) {
-            builder.setFactory(Heading.class, new HeadingSpanFactory(
+            builder.prependFactory(Heading.class, new HeadingSpanFactory(
                     spanGenerator,
                     null,
                     ArrayUtils.map(headingStyleGroups, (styleGroup) -> styleGroup.postStyle)));

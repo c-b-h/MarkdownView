@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import io.noties.markwon.MarkwonPlugin;
 
-public class MarkdownAppCompatTextView extends AppCompatTextView {
+public class MarkdownAppCompatTextView extends AppCompatTextView implements MarkdownView {
     @NonNull
     private final MarkdownHelper markdownHelper;
 
@@ -53,14 +53,17 @@ public class MarkdownAppCompatTextView extends AppCompatTextView {
         markdownHelper.onRestoreInstanceState(state);
     }
 
+    @Override
     public void setMarkdown(@Nullable String markdown) {
         markdownHelper.setMarkdown(markdown);
     }
 
+    @Override
     public void addMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.addMarkwonPlugins(update, plugins);
     }
 
+    @Override
     public void removeMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.removeMarkwonPlugins(update, plugins);
     }

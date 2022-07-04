@@ -10,14 +10,15 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="MarkdownView" parent="MaterialTextView">
+    <declare-styleable name="MarkdownTextView" parent="MaterialTextView">
         <attr name="markdown" format="string|reference" />
         <attr name="markwonFactoryBuilder" format="string|reference" />
 
-        <attr name="mdListItemColor" format="reference|color" />
         <attr name="mdCodeBlockBackgroundColor" format="reference|color" />
-        <attr name="mdCodeBlockTextColor" format="reference|color" />
         <attr name="mdCodeBlockMargin" format="reference|dimension" />
+        <attr name="mdCodeBlockTextColor" format="reference|color" />
+        <attr name="mdLinkUnderlined" format="reference|boolean" />
+        <attr name="mdListItemColor" format="reference|color" />
         <attr name="mdThematicBreakColor" format="reference|color" />
         <attr name="mdThematicBreakHeight" format="reference|dimension" />
 
@@ -56,9 +57,6 @@
         <attr name="mdUnorderedListItemPreStyle" format="reference" />
         <attr name="mdUnorderedListItemStyle" format="reference" />
         <attr name="mdUnorderedListItemPostStyle" format="reference" />
-
-        <!--        <attr name="mdTaskListItemStyle" format="reference" />-->
-        <!--        <attr name="mdTableRowStyle" format="reference" />-->
 
         <attr name="mdParagraphPreStyle" format="reference" />
         <attr name="mdParagraphStyle" format="reference" />

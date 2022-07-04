@@ -14,7 +14,7 @@ import androidx.annotation.StyleRes;
 import io.noties.markwon.MarkwonPlugin;
 
 @SuppressLint("AppCompatCustomView")
-public class MarkdownTextView extends TextView {
+public class MarkdownTextView extends TextView implements MarkdownView {
     @NonNull
     private final MarkdownHelper markdownHelper;
 
@@ -55,14 +55,17 @@ public class MarkdownTextView extends TextView {
         markdownHelper.onRestoreInstanceState(state);
     }
 
+    @Override
     public void setMarkdown(@Nullable String markdown) {
         markdownHelper.setMarkdown(markdown);
     }
 
+    @Override
     public void addMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.addMarkwonPlugins(update, plugins);
     }
 
+    @Override
     public void removeMarkwonPlugins(boolean update, @NonNull MarkwonPlugin... plugins) {
         markdownHelper.removeMarkwonPlugins(update, plugins);
     }

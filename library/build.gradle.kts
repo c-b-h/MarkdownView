@@ -13,12 +13,9 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            consumerProguardFile("proguard-markdownview.pro")
         }
-    }
-
-    buildTypes.all {
-        consumerProguardFile("proguard-markdownview.pro")
     }
 
     compileOptions {

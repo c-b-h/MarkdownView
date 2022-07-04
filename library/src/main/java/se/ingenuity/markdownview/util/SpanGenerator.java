@@ -13,10 +13,12 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Px;
 import androidx.annotation.StyleRes;
+import androidx.annotation.StyleableRes;
 
 import java.util.Arrays;
 
@@ -28,6 +30,7 @@ class SpanGenerator {
     private static final int INTRINSIC_LINE_BACKGROUND_PADDING = -1;
 
     @NonNull
+    @StyleableRes
     private static final int[] TEXT_APPEARANCE_ATTR = {android.R.attr.textAppearance};
 
     @NonNull
