@@ -9,24 +9,13 @@ android {
     defaultConfig {
         minSdk = 22
         targetSdk = 32
-    }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            consumerProguardFile("proguard-markdownview.pro")
-        }
+        consumerProguardFile("proguard-markdownview.pro")
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
     }
 }
 
@@ -35,7 +24,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "se.ingenuity.android"
             artifactId = "MarkdownView"
-            version = "1.0.4"
+            version = "1.0.6"
 
             afterEvaluate {
                 from(components["release"])
