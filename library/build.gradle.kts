@@ -35,7 +35,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "se.ingenuity.android"
             artifactId = "MarkdownView"
-            version = "0.0.2"
+            version = "1.0.4"
 
             afterEvaluate {
                 from(components["release"])
