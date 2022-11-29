@@ -2,6 +2,81 @@
 <resources>
     <attr name="markdownStyles" format="reference" />
 
+    <attr name="markdown" format="string|reference" />
+    <attr name="markwonFactoryBuilder" format="string|reference" />
+
+    <attr name="mdCodeBlockBackgroundColor" format="reference|color" />
+    <attr name="mdCodeBlockMargin" format="reference|dimension" />
+    <attr name="mdCodeBlockTextColor" format="reference|color" />
+    <attr name="mdLinkUnderlined" format="reference|boolean" />
+    <attr name="mdListItemColor" format="reference|color" />
+    <attr name="mdThematicBreakColor" format="reference|color" />
+    <attr name="mdThematicBreakHeight" format="reference|dimension" />
+
+    <attr name="mdH1PreStyle" format="reference" />
+    <attr name="mdH1Style" format="reference" />
+    <attr name="mdH1PostStyle" format="reference" />
+
+    <attr name="mdH2PreStyle" format="reference" />
+    <attr name="mdH2Style" format="reference" />
+    <attr name="mdH2PostStyle" format="reference" />
+
+    <attr name="mdH3PreStyle" format="reference" />
+    <attr name="mdH3Style" format="reference" />
+    <attr name="mdH3PostStyle" format="reference" />
+
+    <attr name="mdH4PreStyle" format="reference" />
+    <attr name="mdH4Style" format="reference" />
+    <attr name="mdH4PostStyle" format="reference" />
+
+    <attr name="mdH5PreStyle" format="reference" />
+    <attr name="mdH5Style" format="reference" />
+    <attr name="mdH5PostStyle" format="reference" />
+
+    <attr name="mdH6PreStyle" format="reference" />
+    <attr name="mdH6Style" format="reference" />
+    <attr name="mdH6PostStyle" format="reference" />
+
+    <attr name="mdEmphasisPreStyle" format="reference" />
+    <attr name="mdEmphasisStyle" format="reference" />
+    <attr name="mdEmphasisPostStyle" format="reference" />
+
+    <attr name="mdStrongEmphasisPreStyle" format="reference" />
+    <attr name="mdStrongEmphasisStyle" format="reference" />
+    <attr name="mdStrongEmphasisPostStyle" format="reference" />
+
+    <attr name="mdBlockQuotePreStyle" format="reference" />
+    <attr name="mdBlockQuoteStyle" format="reference" />
+    <attr name="mdBlockQuotePostStyle" format="reference" />
+
+    <attr name="mdCodePreStyle" format="reference" />
+    <attr name="mdCodeStyle" format="reference" />
+    <attr name="mdCodePostStyle" format="reference" />
+
+    <attr name="mdFencedCodeBlockPreStyle" format="reference" />
+    <attr name="mdFencedCodeBlockStyle" format="reference" />
+    <attr name="mdFencedCodeBlockPostStyle" format="reference" />
+
+    <attr name="mdIndentedCodeBlockPreStyle" format="reference" />
+    <attr name="mdIndentedCodeBlockStyle" format="reference" />
+    <attr name="mdIndentedCodeBlockPostStyle" format="reference" />
+
+    <attr name="mdOrderedListItemPreStyle" format="reference" />
+    <attr name="mdOrderedListItemStyle" format="reference" />
+    <attr name="mdOrderedListItemPostStyle" format="reference" />
+
+    <attr name="mdUnorderedListItemPreStyle" format="reference" />
+    <attr name="mdUnorderedListItemStyle" format="reference" />
+    <attr name="mdUnorderedListItemPostStyle" format="reference" />
+
+    <attr name="mdParagraphPreStyle" format="reference" />
+    <attr name="mdParagraphStyle" format="reference" />
+    <attr name="mdParagraphPostStyle" format="reference" />
+
+    <attr name="mdLinkPreStyle" format="reference" />
+    <attr name="mdLinkStyle" format="reference" />
+    <attr name="mdLinkPostStyle" format="reference" />
+
     <declare-styleable name="MarkdownTextView.Style">
         <attr name="mdBackgroundColor" format="reference|color" />
         <attr name="mdLineBackground" format="reference|color" />
@@ -10,58 +85,234 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="MarkdownTextView" parent="MaterialTextView">
-        <attr name="markdown" format="string|reference" />
-        <attr name="markwonFactoryBuilder" format="string|reference" />
+    <declare-styleable name="MarkdownTextView">
+        <attr name="markdown" />
+        <attr name="markwonFactoryBuilder" />
 
-        <attr name="mdCodeBlockBackgroundColor" format="reference|color" />
-        <attr name="mdCodeBlockMargin" format="reference|dimension" />
-        <attr name="mdCodeBlockTextColor" format="reference|color" />
-        <attr name="mdLinkUnderlined" format="reference|boolean" />
-        <attr name="mdListItemColor" format="reference|color" />
-        <attr name="mdThematicBreakColor" format="reference|color" />
-        <attr name="mdThematicBreakHeight" format="reference|dimension" />
+        <attr name="mdCodeBlockBackgroundColor" />
+        <attr name="mdCodeBlockMargin" />
+        <attr name="mdCodeBlockTextColor" />
+        <attr name="mdLinkUnderlined" />
+        <attr name="mdListItemColor" />
+        <attr name="mdThematicBreakColor" />
+        <attr name="mdThematicBreakHeight" />
 
-        <attr name="mdH1PreStyle" format="reference" />
-        <attr name="mdH1Style" format="reference" />
-        <attr name="mdH1PostStyle" format="reference" />
+        <attr name="mdH1PreStyle" />
+        <attr name="mdH1Style" />
+        <attr name="mdH1PostStyle" />
 
-        <attr name="mdH2PreStyle" format="reference" />
-        <attr name="mdH2Style" format="reference" />
-        <attr name="mdH2PostStyle" format="reference" />
+        <attr name="mdH2PreStyle" />
+        <attr name="mdH2Style" />
+        <attr name="mdH2PostStyle" />
 
-        <attr name="mdH3PreStyle" format="reference" />
-        <attr name="mdH3Style" format="reference" />
-        <attr name="mdH3PostStyle" format="reference" />
+        <attr name="mdH3PreStyle" />
+        <attr name="mdH3Style" />
+        <attr name="mdH3PostStyle" />
 
-        <attr name="mdH4PreStyle" format="reference" />
-        <attr name="mdH4Style" format="reference" />
-        <attr name="mdH4PostStyle" format="reference" />
+        <attr name="mdH4PreStyle" />
+        <attr name="mdH4Style" />
+        <attr name="mdH4PostStyle" />
 
-        <attr name="mdH5PreStyle" format="reference" />
-        <attr name="mdH5Style" format="reference" />
-        <attr name="mdH5PostStyle" format="reference" />
+        <attr name="mdH5PreStyle" />
+        <attr name="mdH5Style" />
+        <attr name="mdH5PostStyle" />
 
-        <attr name="mdH6PreStyle" format="reference" />
-        <attr name="mdH6Style" format="reference" />
-        <attr name="mdH6PostStyle" format="reference" />
+        <attr name="mdH6PreStyle" />
+        <attr name="mdH6Style" />
+        <attr name="mdH6PostStyle" />
 
-        <attr name="mdEmphasisStyle" format="reference" />
-        <attr name="mdStrongEmphasisStyle" format="reference" />
-        <attr name="mdBlockQuoteStyle" format="reference" />
-        <attr name="mdCodeStyle" format="reference" />
-        <attr name="mdFencedCodeBlockStyle" format="reference" />
-        <attr name="mdIndentedCodeBlockStyle" format="reference" />
-        <attr name="mdOrderedListItemStyle" format="reference" />
+        <attr name="mdEmphasisPreStyle" />
+        <attr name="mdEmphasisStyle" />
+        <attr name="mdEmphasisPostStyle" />
 
-        <attr name="mdUnorderedListItemPreStyle" format="reference" />
-        <attr name="mdUnorderedListItemStyle" format="reference" />
-        <attr name="mdUnorderedListItemPostStyle" format="reference" />
+        <attr name="mdStrongEmphasisPreStyle" />
+        <attr name="mdStrongEmphasisStyle" />
+        <attr name="mdStrongEmphasisPostStyle" />
 
-        <attr name="mdParagraphPreStyle" format="reference" />
-        <attr name="mdParagraphStyle" format="reference" />
-        <attr name="mdParagraphPostStyle" format="reference" />
+        <attr name="mdBlockQuotePreStyle" />
+        <attr name="mdBlockQuoteStyle" />
+        <attr name="mdBlockQuotePostStyle" />
 
-        <attr name="mdLinkStyle" format="reference" />
+        <attr name="mdCodePreStyle" />
+        <attr name="mdCodeStyle" />
+        <attr name="mdCodePostStyle" />
+
+        <attr name="mdFencedCodeBlockPreStyle" />
+        <attr name="mdFencedCodeBlockStyle" />
+        <attr name="mdFencedCodeBlockPostStyle" />
+
+        <attr name="mdIndentedCodeBlockPreStyle" />
+        <attr name="mdIndentedCodeBlockStyle" />
+        <attr name="mdIndentedCodeBlockPostStyle" />
+
+        <attr name="mdOrderedListItemPreStyle" />
+        <attr name="mdOrderedListItemStyle" />
+        <attr name="mdOrderedListItemPostStyle" />
+
+        <attr name="mdUnorderedListItemPreStyle" />
+        <attr name="mdUnorderedListItemStyle" />
+        <attr name="mdUnorderedListItemPostStyle" />
+
+        <attr name="mdParagraphPreStyle" />
+        <attr name="mdParagraphStyle" />
+        <attr name="mdParagraphPostStyle" />
+
+        <attr name="mdLinkPreStyle" />
+        <attr name="mdLinkStyle" />
+        <attr name="mdLinkPostStyle" />
+    </declare-styleable>
+
+    <declare-styleable name="MarkdownAppCompatTextView">
+        <attr name="markdown" />
+        <attr name="markwonFactoryBuilder" />
+
+        <attr name="mdCodeBlockBackgroundColor" />
+        <attr name="mdCodeBlockMargin" />
+        <attr name="mdCodeBlockTextColor" />
+        <attr name="mdLinkUnderlined" />
+        <attr name="mdListItemColor" />
+        <attr name="mdThematicBreakColor" />
+        <attr name="mdThematicBreakHeight" />
+
+        <attr name="mdH1PreStyle" />
+        <attr name="mdH1Style" />
+        <attr name="mdH1PostStyle" />
+
+        <attr name="mdH2PreStyle" />
+        <attr name="mdH2Style" />
+        <attr name="mdH2PostStyle" />
+
+        <attr name="mdH3PreStyle" />
+        <attr name="mdH3Style" />
+        <attr name="mdH3PostStyle" />
+
+        <attr name="mdH4PreStyle" />
+        <attr name="mdH4Style" />
+        <attr name="mdH4PostStyle" />
+
+        <attr name="mdH5PreStyle" />
+        <attr name="mdH5Style" />
+        <attr name="mdH5PostStyle" />
+
+        <attr name="mdH6PreStyle" />
+        <attr name="mdH6Style" />
+        <attr name="mdH6PostStyle" />
+
+        <attr name="mdEmphasisPreStyle" />
+        <attr name="mdEmphasisStyle" />
+        <attr name="mdEmphasisPostStyle" />
+
+        <attr name="mdStrongEmphasisPreStyle" />
+        <attr name="mdStrongEmphasisStyle" />
+        <attr name="mdStrongEmphasisPostStyle" />
+
+        <attr name="mdBlockQuotePreStyle" />
+        <attr name="mdBlockQuoteStyle" />
+        <attr name="mdBlockQuotePostStyle" />
+
+        <attr name="mdCodePreStyle" />
+        <attr name="mdCodeStyle" />
+        <attr name="mdCodePostStyle" />
+
+        <attr name="mdFencedCodeBlockPreStyle" />
+        <attr name="mdFencedCodeBlockStyle" />
+        <attr name="mdFencedCodeBlockPostStyle" />
+
+        <attr name="mdIndentedCodeBlockPreStyle" />
+        <attr name="mdIndentedCodeBlockStyle" />
+        <attr name="mdIndentedCodeBlockPostStyle" />
+
+        <attr name="mdOrderedListItemPreStyle" />
+        <attr name="mdOrderedListItemStyle" />
+        <attr name="mdOrderedListItemPostStyle" />
+
+        <attr name="mdUnorderedListItemPreStyle" />
+        <attr name="mdUnorderedListItemStyle" />
+        <attr name="mdUnorderedListItemPostStyle" />
+
+        <attr name="mdParagraphPreStyle" />
+        <attr name="mdParagraphStyle" />
+        <attr name="mdParagraphPostStyle" />
+
+        <attr name="mdLinkPreStyle" />
+        <attr name="mdLinkStyle" />
+        <attr name="mdLinkPostStyle" />
+    </declare-styleable>
+
+    <declare-styleable name="MarkdownMaterialTextView">
+        <attr name="markdown" />
+        <attr name="markwonFactoryBuilder" />
+
+        <attr name="mdCodeBlockBackgroundColor" />
+        <attr name="mdCodeBlockMargin" />
+        <attr name="mdCodeBlockTextColor" />
+        <attr name="mdLinkUnderlined" />
+        <attr name="mdListItemColor" />
+        <attr name="mdThematicBreakColor" />
+        <attr name="mdThematicBreakHeight" />
+
+        <attr name="mdH1PreStyle" />
+        <attr name="mdH1Style" />
+        <attr name="mdH1PostStyle" />
+
+        <attr name="mdH2PreStyle" />
+        <attr name="mdH2Style" />
+        <attr name="mdH2PostStyle" />
+
+        <attr name="mdH3PreStyle" />
+        <attr name="mdH3Style" />
+        <attr name="mdH3PostStyle" />
+
+        <attr name="mdH4PreStyle" />
+        <attr name="mdH4Style" />
+        <attr name="mdH4PostStyle" />
+
+        <attr name="mdH5PreStyle" />
+        <attr name="mdH5Style" />
+        <attr name="mdH5PostStyle" />
+
+        <attr name="mdH6PreStyle" />
+        <attr name="mdH6Style" />
+        <attr name="mdH6PostStyle" />
+
+        <attr name="mdEmphasisPreStyle" />
+        <attr name="mdEmphasisStyle" />
+        <attr name="mdEmphasisPostStyle" />
+
+        <attr name="mdStrongEmphasisPreStyle" />
+        <attr name="mdStrongEmphasisStyle" />
+        <attr name="mdStrongEmphasisPostStyle" />
+
+        <attr name="mdBlockQuotePreStyle" />
+        <attr name="mdBlockQuoteStyle" />
+        <attr name="mdBlockQuotePostStyle" />
+
+        <attr name="mdCodePreStyle" />
+        <attr name="mdCodeStyle" />
+        <attr name="mdCodePostStyle" />
+
+        <attr name="mdFencedCodeBlockPreStyle" />
+        <attr name="mdFencedCodeBlockStyle" />
+        <attr name="mdFencedCodeBlockPostStyle" />
+
+        <attr name="mdIndentedCodeBlockPreStyle" />
+        <attr name="mdIndentedCodeBlockStyle" />
+        <attr name="mdIndentedCodeBlockPostStyle" />
+
+        <attr name="mdOrderedListItemPreStyle" />
+        <attr name="mdOrderedListItemStyle" />
+        <attr name="mdOrderedListItemPostStyle" />
+
+        <attr name="mdUnorderedListItemPreStyle" />
+        <attr name="mdUnorderedListItemStyle" />
+        <attr name="mdUnorderedListItemPostStyle" />
+
+        <attr name="mdParagraphPreStyle" />
+        <attr name="mdParagraphStyle" />
+        <attr name="mdParagraphPostStyle" />
+
+        <attr name="mdLinkPreStyle" />
+        <attr name="mdLinkStyle" />
+        <attr name="mdLinkPostStyle" />
     </declare-styleable>
 </resources>

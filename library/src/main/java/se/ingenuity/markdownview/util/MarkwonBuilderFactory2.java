@@ -10,15 +10,12 @@ import androidx.annotation.StyleRes;
 
 import io.noties.markwon.Markwon;
 
-/**
- * @deprecated Initialize builder using MarkwonBuilderFactory2
- */
-@Deprecated
-public interface MarkwonBuilderFactory {
-    @NonNull
-    Markwon.Builder createBuilder(
+public interface MarkwonBuilderFactory2 {
+    void initBuilder(
             @NonNull Context context,
             @Nullable AttributeSet attrs,
             @AttrRes int defStyleAttr,
-            @StyleRes int defStyleRes);
+            @StyleRes int defStyleRes,
+            @NonNull Markwon.Builder builder
+    );
 }
