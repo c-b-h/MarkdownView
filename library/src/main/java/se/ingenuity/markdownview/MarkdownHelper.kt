@@ -119,8 +119,8 @@ internal class MarkdownHelper(private val textView: TextView) {
         return SS(superState, markdown)
     }
 
-    fun getSuperState(state: Parcelable): Parcelable {
-        return (state as AbsSavedState).superState
+    fun getSuperState(state: Parcelable): Parcelable? {
+        return (state as? AbsSavedState)?.superState
     }
 
     fun onRestoreInstanceState(state: Parcelable) {
